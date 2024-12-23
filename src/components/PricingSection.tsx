@@ -30,7 +30,7 @@ export const PricingSection = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "#E535AB" }}>
-            Dein personalisierter KI-Song – Einfach und einzigartig!
+            Dein personalisiertes Kinderlied – Einfach und einzigartig!
           </h2>
         </motion.div>
 
