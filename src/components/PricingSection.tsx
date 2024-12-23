@@ -54,7 +54,7 @@ export const PricingSection = () => {
           <FeatureCard
             title="Schnell"
             icon={<Clock className="w-8 h-8 text-primary" />}
-            description="Dein Song ist in der Regel innerhalb von 60 Minuten fertig, garantiert innerhalb von 24 Stunden."
+            description="Dein Lied ist innerhalb von 24 Stunden fertig."
           />
           <FeatureCard
             title="Flexibel"
