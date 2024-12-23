@@ -70,9 +70,8 @@ const Create = () => {
 
         <div className="bg-[#FFF0F9] p-6 rounded-lg mb-8">
           <p className="text-center text-lg text-[#333333]">
-            Generiere jetzt deinen Song für <span className="text-[#E535AB]">19,90€</span> und erhalte deinen Song in der Regel innerhalb der nächsten 60 Minuten.
-            <br />
-            Du erhältst 1 Ki-Song in 2 Varianten inkl. Songtext als mp3 Datei.
+            Lass dir deinen ganz persönlichen Song erstellen – für nur <span className="text-[#E535AB]">19,90€</span> Innerhalb von 24 Stunden ist dein Song fertig. Du erhältst ihn in 2 Varianten, inklusive Songtext, als MP3-Datei. 
+            <br>
           </p>
         </div>
 
