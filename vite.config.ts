@@ -19,4 +19,13 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Add this section to handle client-side routing
+  preview: {
+    port: 8080,
+  },
+  build: {
+    outDir: "dist",
+  },
+  // This ensures that all routes are redirected to index.html
+  appType: "spa",
 }));
