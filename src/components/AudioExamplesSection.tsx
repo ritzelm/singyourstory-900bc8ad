@@ -89,12 +89,12 @@ export const AudioExamplesSection = () => {
     {
       id: "song2",
       title: "Lukas putzt seine Zähne",
-      url: "https://ritzelmut.de/meinkinderlied-songs/annar%C3%A4umtauf.mp3"
+      url: "https://ritzelmut.de/meinkinderlied-songs/lukaszähne.mp3"
     },
     {
       id: "song3",
-      title: "Happy Birthday für Mia",
-      url: "https://ritzelmut.de/meinkinderlied-songs/annar%C3%A4umtauf.mp3"
+      title: "Happy Birthday für Mina",
+      url: "https://ritzelmut.de/meinkinderlied-songs/minageburtstag.mp3"
     }
   ];
 
