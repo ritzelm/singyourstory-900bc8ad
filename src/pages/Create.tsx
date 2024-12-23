@@ -62,7 +62,7 @@ const Create = () => {
       <Navigation />
       <div className="container mx-auto px-4 py-24">
         <h1 className="text-4xl font-bold text-center mb-4 text-[#333333]">
-          Lass uns jetzt euren Song generieren!
+          Lass uns jetzt euren Song komponieren!
         </h1>
         <p className="text-center mb-8 text-[#333333]">
           Gebe deine persönlichen und individuellen Details ein, und du erhältst einen Song, der die Alltagsroutinen rockt!
