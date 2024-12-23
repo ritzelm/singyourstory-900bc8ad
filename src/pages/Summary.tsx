@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface FormData {
   ageGroup: string;
@@ -36,6 +38,7 @@ const Summary = () => {
   const [formData, setFormData] = useState<FormData | null>(null);
   const [agbAccepted, setAgbAccepted] = useState(false);
   const [widerrufsrechtAccepted, setWiderrufsrechtAccepted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const savedData = sessionStorage.getItem('songFormData');
@@ -50,8 +53,25 @@ const Summary = () => {
     navigate('/create', { state: { fromSummary: true } });
   };
 
-  const handlePayment = () => {
-    console.log('Proceeding to payment...');
+  const handlePayment = async () => {
+    if (!formData) return;
+    
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-order', {
+        body: formData
+      });
+
+      if (error) throw error;
+      if (!data?.url) throw new Error('No checkout URL received');
+
+      // Redirect to Stripe checkout
+      window.location.href = data.url;
+    } catch (error) {
+      console.error('Error creating order:', error);
+      toast.error('Es gab einen Fehler bei der Bestellverarbeitung. Bitte versuchen Sie es später erneut.');
+      setIsLoading(false);
+    }
   };
 
   if (!formData) return null;
@@ -118,10 +138,10 @@ const Summary = () => {
 
           <Button
             onClick={handlePayment}
-            disabled={!agbAccepted || !widerrufsrechtAccepted}
+            disabled={!agbAccepted || !widerrufsrechtAccepted || isLoading}
             className="w-full bg-[#E535AB] hover:bg-[#E535AB]/90 text-white py-4 rounded-full text-lg font-semibold disabled:opacity-50"
           >
-            Weiter zur Zahlung
+            {isLoading ? 'Wird verarbeitet...' : 'Weiter zur Zahlung'}
           </Button>
         </div>
       </div>
