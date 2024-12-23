@@ -33,7 +33,7 @@ export const StepsSection = () => {
               icon: Pencil
             },
             {
-              title: "3. Vorschau und Download",
+              title: "3. Produktion und Download",
               description: "Lade dein Lied herunter oder verschenke es!",
               icon: Download
             }
@@ -71,7 +71,7 @@ export const StepsSection = () => {
               className="text-white"
               style={{ backgroundColor: "#E535AB" }}
             >
-              Jetzt ausprobieren
+              Jetzt bestellen
             </Button>
           </Link>
         </motion.div>
