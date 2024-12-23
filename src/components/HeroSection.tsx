@@ -33,7 +33,7 @@ export const HeroSection = () => {
           {...fadeIn}
           transition={{ delay: 0.2 }}
         >
-          Magische Momente durch Musik
+          Magische Momente durch personalisierte Kinderlieder
         </motion.h1>
         <motion.p 
           className="text-lg md:text-xl text-gray-800 mb-8 max-w-2xl mx-auto"
