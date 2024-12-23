@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export const FAQSection = () => {
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.href = "mailto:info@singyourstory.com";
+    window.location.href = "mailto:info@meinkinderlied.de";
   };
 
   return (
