@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/cN24ii7Uk12W8XSaEE";
@@ -21,9 +21,11 @@ serve(async (req) => {
     console.log('Form data received:', formData);
     
     // Validate required fields
-    if (!formData.childName || !formData.childAge || !formData.ageGroup || 
-        !formData.occasion || !formData.genre) {
-      throw new Error('Missing required fields');
+    const requiredFields = ['childName', 'childAge', 'ageGroup', 'occasion', 'genre'];
+    for (const field of requiredFields) {
+      if (!formData[field]) {
+        throw new Error(`Missing required field: ${field}`);
+      }
     }
 
     // Generate order ID (timestamp + random string)
@@ -48,11 +50,11 @@ serve(async (req) => {
       genre: formData.genre,
       hobbies: formData.hobbies || null,
       favorites: formData.favorites || null,
-      family_members: formData.familyMembers || null
+      family_members: formData.familyMembers || null,
+      status: 'pending'
     };
 
-    // Store order in database
-    console.log('Storing order in database...', orderData);
+    console.log('Attempting to store order in database:', orderData);
     const { data: insertedData, error: dbError } = await supabaseClient
       .from('orders')
       .insert(orderData)
@@ -65,44 +67,48 @@ serve(async (req) => {
     }
     console.log('Order stored successfully:', insertedData);
 
-    // Send email
-    const emailHtml = `
-      <h1>Neue Bestellung: ${orderId}</h1>
-      <h2>Kinderinformationen:</h2>
-      <p><strong>Name:</strong> ${formData.childName}</p>
-      <p><strong>Alter:</strong> ${formData.childAge}</p>
-      <p><strong>Altersgruppe:</strong> ${formData.ageGroup}</p>
-      <h2>Songdetails:</h2>
-      <p><strong>Anlass:</strong> ${formData.occasion}</p>
-      <p><strong>Genre:</strong> ${formData.genre}</p>
-      <h2>Weitere Details:</h2>
-      <p><strong>Hobbys:</strong> ${formData.hobbies || '-'}</p>
-      <p><strong>Lieblingsdinge:</strong> ${formData.favorites || '-'}</p>
-      <p><strong>Familienmitglieder:</strong> ${formData.familyMembers || '-'}</p>
-    `;
+    // Send email notification
+    try {
+      const emailHtml = `
+        <h1>Neue Bestellung: ${orderId}</h1>
+        <h2>Kinderinformationen:</h2>
+        <p><strong>Name:</strong> ${formData.childName}</p>
+        <p><strong>Alter:</strong> ${formData.childAge}</p>
+        <p><strong>Altersgruppe:</strong> ${formData.ageGroup}</p>
+        <h2>Songdetails:</h2>
+        <p><strong>Anlass:</strong> ${formData.occasion}</p>
+        <p><strong>Genre:</strong> ${formData.genre}</p>
+        <h2>Weitere Details:</h2>
+        <p><strong>Hobbys:</strong> ${formData.hobbies || '-'}</p>
+        <p><strong>Lieblingsdinge:</strong> ${formData.favorites || '-'}</p>
+        <p><strong>Familienmitglieder:</strong> ${formData.familyMembers || '-'}</p>
+      `;
 
-    console.log('Sending email...');
-    const emailRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: "MeinKinderlied <order@meinkinderlied.de>",
-        to: ["flo@ritzelmu.de"],
-        subject: `Neue Bestellung: ${orderId}`,
-        html: emailHtml,
-      }),
-    });
+      console.log('Sending email notification...');
+      const emailRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "MeinKinderlied <order@meinkinderlied.de>",
+          to: ["flo@ritzelmu.de"],
+          subject: `Neue Bestellung: ${orderId}`,
+          html: emailHtml,
+        }),
+      });
 
-    if (!emailRes.ok) {
-      const emailError = await emailRes.text();
-      console.error('Email sending failed:', emailError);
-      // Don't throw here, we still want to return the checkout URL even if email fails
-      console.log('Continuing despite email error');
-    } else {
-      console.log('Email sent successfully');
+      if (!emailRes.ok) {
+        const emailError = await emailRes.text();
+        console.error('Email sending failed:', emailError);
+        // Don't throw here, continue with order processing
+      } else {
+        console.log('Email sent successfully');
+      }
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      // Don't throw here, continue with order processing
     }
 
     // Return checkout URL with order ID
