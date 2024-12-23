@@ -21,7 +21,7 @@ export const FeaturesSection = () => {
           {[
             { icon: Music, title: "Individuell", desc: "Maßgeschneidert für jedes Kind und jeden Anlass" },
             { icon: Clock, title: "Schnell", desc: "In nur 3 Minuten bestellt, in 24 Stunden geliefert" },
-            { icon: Heart, title: "Liebevoll", desc: "Mit Herz und KI komponiert" },
+            { icon: Heart, title: "Liebevoll", desc: "Mit Herz und KI komponiert. Individuell für jedes Kind" },
             { icon: Gift, title: "Besonders", desc: "Das perfekte Geschenk für jedes Kind" }
           ].map((feature, i) => (
             <motion.div
