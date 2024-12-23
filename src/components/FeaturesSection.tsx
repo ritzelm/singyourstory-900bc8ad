@@ -19,10 +19,10 @@ export const FeaturesSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { icon: Music, title: "Individuell", desc: "Maßgeschneidert für jedes Kind" },
-            { icon: Clock, title: "Schnell", desc: "In nur 3 Minuten fertig" },
-            { icon: Heart, title: "Liebevoll", desc: "Mit Herz komponiert" },
-            { icon: Gift, title: "Besonders", desc: "Das perfekte Geschenk" }
+            { icon: Music, title: "Individuell", desc: "Maßgeschneidert für jedes Kind und jeden Anlass" },
+            { icon: Clock, title: "Schnell", desc: "In nur 3 Minuten bestellt, in 24 Stunden geliefert" },
+            { icon: Heart, title: "Liebevoll", desc: "Mit Herz und KI komponiert" },
+            { icon: Gift, title: "Besonders", desc: "Das perfekte Geschenk für jedes Kind" }
           ].map((feature, i) => (
             <motion.div
               key={feature.title}
