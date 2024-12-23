@@ -84,17 +84,17 @@ export const AudioExamplesSection = () => {
     {
       id: "song1",
       title: "Anna räumt auf",
-      url: "https://meinkinderlied.de/songs/annaräumtauf.mp3"
+      url: "https://ritzelmut.de/meinkinderlied-songs/annar%C3%A4umtauf.mp3"
     },
     {
       id: "song2",
       title: "Lukas putzt seine Zähne",
-      url: "https://meinkinderlied.de/songs/lukasputztseinezähne.mp3"
+      url: "https://ritzelmut.de/meinkinderlied-songs/annar%C3%A4umtauf.mp3"
     },
     {
       id: "song3",
       title: "Happy Birthday für Mia",
-      url: "https://meinkinderlied.de/songs/happybirthdayfürmia.mp3"
+      url: "https://ritzelmut.de/meinkinderlied-songs/annar%C3%A4umtauf.mp3"
     }
   ];
 
