@@ -62,7 +62,7 @@ const Create = () => {
       <Navigation />
       <div className="container mx-auto px-4 py-24">
         <h1 className="text-4xl font-bold text-center mb-4 text-[#333333]">
-          Lass uns jetzt euren Song komponieren!
+          Lass uns jetzt euren Song generieren!
         </h1>
         <p className="text-center mb-8 text-[#333333]">
           Gebe deine persönlichen und individuellen Details ein, und du erhältst einen Song, der die Alltagsroutinen rockt!
@@ -70,8 +70,9 @@ const Create = () => {
 
         <div className="bg-[#FFF0F9] p-6 rounded-lg mb-8">
           <p className="text-center text-lg text-[#333333]">
-            Lass dir deinen ganz persönlichen Song erstellen – für nur <span className="text-[#E535AB]">19,90€</span> Innerhalb von 24 Stunden ist dein Song fertig. Du erhältst ihn in 2 Varianten, inklusive Songtext, als MP3-Datei. 
-            <br>
+            Generiere jetzt deinen Song für <span className="text-[#E535AB]">19,90€</span> und erhalte deinen Song in der Regel innerhalb der nächsten 60 Minuten.
+            <br />
+            Du erhältst 1 Ki-Song in 2 Varianten inkl. Songtext als mp3 Datei.
           </p>
         </div>
 
