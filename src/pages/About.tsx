@@ -105,7 +105,7 @@ const About = () => {
           </div>
           <AudioCard 
             title="Hey Samu, los wir räumen auf" 
-            audioUrl="https://meinkinderlied.de/songs/heysamuloswirräumenauf.mp3" 
+            audioUrl="https://ritzelmut.de/meinkinderlied-songs/annaräumtauf.mp3" 
           />
         </div>
       </section>
