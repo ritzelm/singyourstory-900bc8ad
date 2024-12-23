@@ -54,22 +54,37 @@ const Summary = () => {
   };
 
   const handlePayment = async () => {
-    if (!formData) return;
+    if (!formData) {
+      toast.error('Keine Formulardaten gefunden');
+      return;
+    }
     
     setIsLoading(true);
     try {
+      console.log('Sending order data:', formData);
       const { data, error } = await supabase.functions.invoke('create-order', {
         body: formData
       });
 
-      if (error) throw error;
-      if (!data?.url) throw new Error('No checkout URL received');
+      console.log('Response:', data, error);
 
-      // Redirect to Stripe checkout
+      if (error) {
+        console.error('Error from edge function:', error);
+        throw error;
+      }
+
+      if (!data?.url) {
+        console.error('No checkout URL received');
+        throw new Error('Keine Checkout-URL erhalten');
+      }
+
+      console.log('Redirecting to:', data.url);
       window.location.href = data.url;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating order:', error);
-      toast.error('Es gab einen Fehler bei der Bestellverarbeitung. Bitte versuchen Sie es später erneut.');
+      toast.error(
+        error.message || 'Es gab einen Fehler bei der Bestellverarbeitung. Bitte versuchen Sie es später erneut.'
+      );
       setIsLoading(false);
     }
   };

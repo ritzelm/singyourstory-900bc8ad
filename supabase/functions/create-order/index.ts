@@ -10,17 +10,21 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    console.log('Received request to create-order function');
     const formData = await req.json();
+    console.log('Form data received:', formData);
     
     // Generate order ID (timestamp + random string)
     const timestamp = new Date().getTime();
     const randomStr = Math.random().toString(36).substring(2, 8);
     const orderId = `ORDER-${timestamp}-${randomStr}`;
+    console.log('Generated order ID:', orderId);
 
     // Initialize Supabase client
     const supabaseClient = createClient(
@@ -29,6 +33,7 @@ serve(async (req) => {
     );
 
     // Store order in database
+    console.log('Storing order in database...');
     const { error: dbError } = await supabaseClient
       .from('orders')
       .insert({
@@ -37,8 +42,10 @@ serve(async (req) => {
       });
 
     if (dbError) {
+      console.error('Database error:', dbError);
       throw new Error(`Database error: ${dbError.message}`);
     }
+    console.log('Order stored successfully');
 
     // Send email
     const emailHtml = `
@@ -56,6 +63,7 @@ serve(async (req) => {
       <p><strong>Familienmitglieder:</strong> ${formData.familyMembers}</p>
     `;
 
+    console.log('Sending email...');
     const emailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -71,15 +79,24 @@ serve(async (req) => {
     });
 
     if (!emailRes.ok) {
-      console.error('Email sending failed:', await emailRes.text());
+      const emailError = await emailRes.text();
+      console.error('Email sending failed:', emailError);
+      throw new Error(`Email sending failed: ${emailError}`);
     }
+    console.log('Email sent successfully');
 
     // Return checkout URL with order ID
     const checkoutUrl = `${STRIPE_CHECKOUT_URL}?client_reference_id=${orderId}`;
+    console.log('Returning checkout URL:', checkoutUrl);
 
     return new Response(
       JSON.stringify({ url: checkoutUrl, orderId }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { 
+        headers: { 
+          ...corsHeaders, 
+          'Content-Type': 'application/json' 
+        } 
+      }
     );
 
   } catch (error) {
