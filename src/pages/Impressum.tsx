@@ -15,7 +15,7 @@ const Impressum = () => {
           Deutschland</p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Vertreten durch</h2>
-          <p>Geschäftsführer: Florian Lehwald</p>
+          <p>Geschäftsführer: Florian D. B. Lehwald</p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Kontakt</h2>
           <p>E-Mail: info@meinkinderlied.de</p>
