@@ -38,7 +38,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     />
                     <label
                       htmlFor={`age-${age}`}
-                      className="flex items-center justify-center px-4 py-2 rounded-md cursor-pointer text-[#333333] border-2 border-transparent bg-[#FFF0F9] peer-checked:bg-[#E535AB] peer-checked:text-white peer-checked:border-[#E535AB] peer-checked:shadow-lg peer-checked:scale-105 hover:bg-[#E535AB]/80 hover:text-white transition-all duration-200 ease-in-out transform"
+                      className="flex items-center justify-center px-4 py-2 rounded-md cursor-pointer text-[#333333] border-2 border-transparent bg-[#FFF0F9] hover:bg-[#E535AB] hover:text-white peer-checked:bg-[#E535AB] peer-checked:text-white peer-checked:border-[#E535AB] peer-checked:shadow-lg peer-checked:scale-105 transition-all duration-200 ease-in-out transform"
                     >
                       {age}
                     </label>
@@ -78,7 +78,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     />
                     <label
                       htmlFor={`occasion-${option.value}`}
-                      className="flex items-center justify-center px-4 py-2 rounded-md cursor-pointer text-[#333333] border-2 border-transparent bg-[#FFF0F9] peer-checked:bg-[#E535AB] peer-checked:text-white peer-checked:border-[#E535AB] peer-checked:shadow-lg peer-checked:scale-105 hover:bg-[#E535AB]/80 hover:text-white transition-all duration-200 ease-in-out transform"
+                      className="flex items-center justify-center px-4 py-2 rounded-md cursor-pointer text-[#333333] border-2 border-transparent bg-[#FFF0F9] hover:bg-[#E535AB] hover:text-white peer-checked:bg-[#E535AB] peer-checked:text-white peer-checked:border-[#E535AB] peer-checked:shadow-lg peer-checked:scale-105 transition-all duration-200 ease-in-out transform"
                     >
                       {option.label}
                     </label>
@@ -117,7 +117,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     />
                     <label
                       htmlFor={`genre-${option.value}`}
-                      className="flex items-center justify-center px-4 py-2 rounded-md cursor-pointer text-[#333333] border-2 border-transparent bg-[#FFF0F9] peer-checked:bg-[#E535AB] peer-checked:text-white peer-checked:border-[#E535AB] peer-checked:shadow-lg peer-checked:scale-105 hover:bg-[#E535AB]/80 hover:text-white transition-all duration-200 ease-in-out transform"
+                      className="flex items-center justify-center px-4 py-2 rounded-md cursor-pointer text-[#333333] border-2 border-transparent bg-[#FFF0F9] hover:bg-[#E535AB] hover:text-white peer-checked:bg-[#E535AB] peer-checked:text-white peer-checked:border-[#E535AB] peer-checked:shadow-lg peer-checked:scale-105 transition-all duration-200 ease-in-out transform"
                     >
                       {option.label}
                     </label>
