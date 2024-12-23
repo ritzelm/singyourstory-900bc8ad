@@ -93,7 +93,7 @@ serve(async (req) => {
         },
         body: JSON.stringify({
           from: "MeinKinderlied <order@meinkinderlied.de>",
-          to: ["flo@ritzelmut.de"],
+          to: ["flo@ritzelmut.de"], // Fixed email address
           subject: `Neue Bestellung: ${orderId}`,
           html: emailHtml,
         }),
@@ -125,7 +125,7 @@ serve(async (req) => {
       }
     );
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error processing order:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
