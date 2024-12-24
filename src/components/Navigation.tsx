@@ -117,7 +117,7 @@ export const Navigation = () => {
               ))}
               <Link to="/create">
                 <Button className="bg-primary hover:bg-primary/90 text-white">
-                  Deinen Song erstellen
+                  Deinen Song bestellen
                 </Button>
               </Link>
             </div>

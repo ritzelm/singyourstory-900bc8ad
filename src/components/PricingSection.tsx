@@ -76,7 +76,7 @@ export const PricingSection = () => {
               className="text-lg px-8 py-6"
               style={{ backgroundColor: "#E535AB" }}
             >
-              Jetzt deinen Song erstellen – für nur 19,90 €!
+              Jetzt deinen Song bestellen – für nur 19,90 €!
             </Button>
           </Link>
         </motion.div>
