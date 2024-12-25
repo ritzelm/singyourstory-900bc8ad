@@ -1,6 +1,9 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/cN24ii7Uk12W8XSaEE";
 
 const corsHeaders = {
@@ -17,7 +20,11 @@ serve(async (req) => {
   try {
     console.log('Received request to create-order function');
     
-    // Check if RESEND_API_KEY is set
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+      console.error('Missing Supabase configuration');
+      throw new Error('Database configuration error');
+    }
+
     if (!RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not set');
       throw new Error('Email configuration error');
@@ -26,7 +33,7 @@ serve(async (req) => {
     const formData = await req.json();
     console.log('Form data received:', formData);
     
-    // Validate required fields - removed ageGroup from required fields
+    // Validate required fields
     const requiredFields = ['childName', 'childAge', 'occasion', 'genre', 'email'];
     for (const field of requiredFields) {
       if (!formData[field]) {
@@ -34,13 +41,16 @@ serve(async (req) => {
       }
     }
 
-    // Generate order ID (timestamp + random string)
+    // Generate order ID
     const timestamp = new Date().getTime();
     const randomStr = Math.random().toString(36).substring(2, 8);
     const orderId = `ORDER-${timestamp}-${randomStr}`;
     console.log('Generated order ID:', orderId);
 
-    // Prepare order data - removed ageGroup
+    // Initialize Supabase client
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    // Prepare order data
     const orderData = {
       order_id: orderId,
       child_name: formData.childName,
@@ -55,21 +65,21 @@ serve(async (req) => {
 
     console.log('Attempting to store order in database:', orderData);
 
-    // Trigger background webhook
-    (async () => {
-      try {
-        const alertResponse = await fetch("http://tunnel.ritzelmut.de:5000/blink", { method: "GET" });
-        if (!alertResponse.ok) {
-          console.error("Alert webhook failed:", await alertResponse.text());
-        } else {
-          console.log("Alert webhook triggered successfully.");
-        }
-      } catch (webhookError) {
-        console.error("Error triggering alert webhook:", webhookError);
-      }
-    })();
+    // Insert order into database
+    const { data: insertedOrder, error: insertError } = await supabase
+      .from('orders')
+      .insert(orderData)
+      .select()
+      .single();
 
-    // Send email notification - removed ageGroup from email template
+    if (insertError) {
+      console.error('Database insertion error:', insertError);
+      throw new Error(`Failed to save order: ${insertError.message}`);
+    }
+
+    console.log('Order saved successfully:', insertedOrder);
+
+    // Send email notification
     const emailHtml = `
       <h1>Neue Bestellung: ${orderId}</h1>
       <h2>Kinderinformationen:</h2>
