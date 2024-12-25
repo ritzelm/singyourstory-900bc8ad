@@ -50,11 +50,12 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                 className="grid grid-cols-2 md:grid-cols-3 gap-4"
               >
                 {[
-                  { value: "weihnachten", label: "Weihnachten" },
-                  { value: "kreativ", label: "Kreativer Freiraum" },
                   { value: "zahneputzen", label: "Zähneputzen" },
                   { value: "aufraumen", label: "Aufräumen" },
+                  { value: "anziehen", label: "Anziehen" },
                   { value: "geburtstag", label: "Geburtstag" },
+                  { value: "weihnachten", label: "Weihnachten" },
+                  { value: "kreativ", label: "Kreativer Freiraum" },
                 ].map((option) => (
                   <div key={option.value} className="relative">
                     <RadioGroupItem
