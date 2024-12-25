@@ -6,19 +6,19 @@ export const ReviewsSection = () => {
       name: "Sarah M.",
       rating: 5,
       text: "Das personalisierte Lied für meine Tochter Emma war einfach magisch! Sie strahlt jedes Mal, wenn sie ihren Namen im Lied hört. Eine wunderbare Geschenkidee!",
-      date: "März 2024"
+      date: "Dezember 2024"
     },
     {
       name: "Michael K.",
       rating: 5,
       text: "Wir haben ein Einschlaflied für unseren Sohn bestellt. Die Qualität ist erstklassig und die persönliche Note macht es zu etwas ganz Besonderem. Schnelle Lieferung und toller Service!",
-      date: "Februar 2024"
+      date: "Dezember 2024"
     },
     {
       name: "Lisa B.",
       rating: 5,
       text: "Das Zahnputzlied mit dem Namen meines Sohnes hat unsere morgendliche Routine komplett verändert. Jetzt macht das Zähneputzen richtig Spaß! Absolut empfehlenswert.",
-      date: "Januar 2024"
+      date: "Dezember 2024"
     }
   ];
 
