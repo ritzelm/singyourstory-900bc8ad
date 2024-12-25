@@ -50,11 +50,23 @@ serve(async (req) => {
     // Initialize Supabase client
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
+    // Determine age group based on child age
+    const childAge = parseInt(formData.childAge);
+    let ageGroup = '0-3';
+    if (childAge >= 4 && childAge <= 6) {
+      ageGroup = '4-6';
+    } else if (childAge >= 7 && childAge <= 9) {
+      ageGroup = '7-9';
+    } else if (childAge >= 10) {
+      ageGroup = '10+';
+    }
+
     // Prepare order data
     const orderData = {
       order_id: orderId,
       child_name: formData.childName,
       child_age: formData.childAge,
+      age_group: ageGroup, // Added age_group field
       occasion: formData.occasion,
       genre: formData.genre,
       hobbies: formData.hobbies || null,
@@ -85,6 +97,7 @@ serve(async (req) => {
       <h2>Kinderinformationen:</h2>
       <p><strong>Name:</strong> ${formData.childName}</p>
       <p><strong>Alter:</strong> ${formData.childAge}</p>
+      <p><strong>Altersgruppe:</strong> ${ageGroup}</p>
       <h2>Songdetails:</h2>
       <p><strong>Anlass:</strong> ${formData.occasion}</p>
       <p><strong>Genre:</strong> ${formData.genre}</p>
