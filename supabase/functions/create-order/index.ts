@@ -56,6 +56,20 @@ serve(async (req) => {
 
     console.log('Attempting to store order in database:', orderData);
 
+    // Trigger background webhook
+    (async () => {
+      try {
+        const alertResponse = await fetch("http://tunnel.ritzelmut.de:5000/blink", { method: "GET" });
+        if (!alertResponse.ok) {
+          console.error("Alert webhook failed:", await alertResponse.text());
+        } else {
+          console.log("Alert webhook triggered successfully.");
+        }
+      } catch (webhookError) {
+        console.error("Error triggering alert webhook:", webhookError);
+      }
+    })();
+
     // Send email notification
     const emailHtml = `
       <h1>Neue Bestellung: ${orderId}</h1>
@@ -110,7 +124,7 @@ serve(async (req) => {
       }
     );
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error processing order:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
