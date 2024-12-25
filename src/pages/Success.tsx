@@ -1,42 +1,11 @@
-import { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Success = () => {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Überprüfen, ob die Seite direkt aufgerufen wurde (ohne Stripe-Parameter)
-    if (!searchParams.get('payment_intent')) {
-      navigate('/');
-      return;
-    }
-    
-    // Simuliere Ladezeit für Tracking-Pixel
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, [searchParams, navigate]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <Navigation />
-        <div className="flex-grow flex items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-[#E535AB]" />
-        </div>
-        <Footer />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
