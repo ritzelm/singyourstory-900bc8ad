@@ -3,9 +3,29 @@ import { Footer } from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Success = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const triggerBlinkWebhook = async () => {
+      try {
+        const response = await fetch("http://tunnel.ritzelmut.de:5000/blink", {
+          method: "GET",
+        });
+        if (response.ok) {
+          console.log("Webhook triggered successfully.");
+        } else {
+          console.error("Failed to trigger webhook:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error triggering webhook:", error);
+      }
+    };
+
+    triggerBlinkWebhook();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -29,7 +49,6 @@ const Success = () => {
                   <li>Innerhalb von 24 Stunden senden wir dir dein fertiges Lied per E-Mail zu</li>
                 </ul>
               </div>
-              
               <div className="text-center">
                 <Button 
                   onClick={() => navigate('/')}
@@ -40,11 +59,7 @@ const Success = () => {
               </div>
             </CardContent>
           </Card>
-
-          {/* Platzhalter für Tracking-Pixel */}
-          <div id="tracking-pixel-container">
-            {/* Hier können Tracking-Pixel eingefügt werden */}
-          </div>
+          <div id="tracking-pixel-container"></div>
         </div>
       </div>
       <Footer />
