@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 interface FormData {
-  ageGroup: string;
+  email: string;
   occasion: string;
   genre: string;
   childName: string;
@@ -109,9 +109,9 @@ const Summary = () => {
           
           <div className="bg-[#FFF0F9] p-6 rounded-lg mb-8 space-y-4">
             <h2 className="text-xl font-semibold text-[#333333] mb-4">Deine Angaben:</h2>
+            <p><strong>Email:</strong> {formData.email}</p>
             <p><strong>Name des Kindes:</strong> {formData.childName}</p>
             <p><strong>Alter:</strong> {formData.childAge}</p>
-            <p><strong>Altersgruppe:</strong> {formData.ageGroup} Jahre</p>
             <p><strong>Anlass:</strong> {occasionLabels[formData.occasion]}</p>
             <p><strong>Genre:</strong> {genreLabels[formData.genre]}</p>
             <p><strong>Hobbys:</strong> {formData.hobbies}</p>

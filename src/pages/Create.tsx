@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const formSchema = z.object({
-  ageGroup: z.string(),
+  email: z.string().email("Bitte gib eine gültige Email-Adresse ein"),
   occasion: z.string(),
   genre: z.string(),
   childName: z.string().min(2, "Name muss mindestens 2 Zeichen lang sein"),
@@ -27,7 +27,7 @@ const Create = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ageGroup: "",
+      email: "",
       occasion: "",
       genre: "",
       childName: "",
@@ -40,14 +40,12 @@ const Create = () => {
 
   useEffect(() => {
     const savedData = sessionStorage.getItem('songFormData');
-    // Nur wenn wir von der Summary-Seite kommen (state.fromSummary ist true) und es gespeicherte Daten gibt
     if (location.state?.fromSummary && savedData) {
       const parsedData = JSON.parse(savedData);
       Object.keys(parsedData).forEach((key) => {
         form.setValue(key as keyof z.infer<typeof formSchema>, parsedData[key]);
       });
     } else {
-      // Wenn wir nicht von der Summary-Seite kommen, lösche die gespeicherten Daten
       sessionStorage.removeItem('songFormData');
     }
   }, [form, location.state]);

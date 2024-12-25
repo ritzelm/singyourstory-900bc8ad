@@ -27,7 +27,7 @@ serve(async (req) => {
     console.log('Form data received:', formData);
     
     // Validate required fields
-    const requiredFields = ['childName', 'childAge', 'ageGroup', 'occasion', 'genre'];
+    const requiredFields = ['childName', 'childAge', 'ageGroup', 'occasion', 'genre', 'email'];
     for (const field of requiredFields) {
       if (!formData[field]) {
         throw new Error(`Missing required field: ${field}`);
@@ -110,8 +110,8 @@ serve(async (req) => {
     const emailData = await emailRes.json();
     console.log('Email sent successfully:', emailData);
 
-    // Return checkout URL with order ID
-    const checkoutUrl = `${STRIPE_CHECKOUT_URL}?client_reference_id=${orderId}`;
+    // Return checkout URL with order ID and email
+    const checkoutUrl = `${STRIPE_CHECKOUT_URL}?client_reference_id=${orderId}&prefilled_email=${encodeURIComponent(formData.email)}`;
     console.log('Returning checkout URL:', checkoutUrl);
 
     return new Response(
