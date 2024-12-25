@@ -11,10 +11,10 @@ export type Database = {
     Tables: {
       orders: {
         Row: {
-          age_group: string
           child_age: string
           child_name: string
           created_at: string
+          email: string
           family_members: string | null
           favorites: string | null
           genre: string
@@ -25,10 +25,10 @@ export type Database = {
           status: string
         }
         Insert: {
-          age_group: string
           child_age: string
           child_name: string
           created_at?: string
+          email: string
           family_members?: string | null
           favorites?: string | null
           genre: string
@@ -39,10 +39,10 @@ export type Database = {
           status?: string
         }
         Update: {
-          age_group?: string
           child_age?: string
           child_name?: string
           created_at?: string
+          email?: string
           family_members?: string | null
           favorites?: string | null
           genre?: string
