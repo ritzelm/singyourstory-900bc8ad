@@ -95,7 +95,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: "MeinKinderlied <order@meinkinderlied.de>",
-        to: ["florian@precisionx.com", "david@ritzelmut.de"], 
+        to: ["florian@precisionx.com", "david@precisionx.com"], 
         subject: `Neue Bestellung: ${orderId}`,
         html: emailHtml,
       }),
