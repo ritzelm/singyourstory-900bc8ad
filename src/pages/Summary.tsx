@@ -24,6 +24,7 @@ const occasionLabels: Record<string, string> = {
   zahneputzen: "Zähneputzen",
   aufraumen: "Aufräumen",
   geburtstag: "Geburtstag",
+  anziehen: "Anziehen",
 };
 
 const genreLabels: Record<string, string> = {
