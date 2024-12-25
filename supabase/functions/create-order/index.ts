@@ -26,8 +26,8 @@ serve(async (req) => {
     const formData = await req.json();
     console.log('Form data received:', formData);
     
-    // Validate required fields
-    const requiredFields = ['childName', 'childAge', 'ageGroup', 'occasion', 'genre', 'email'];
+    // Validate required fields - removed ageGroup from required fields
+    const requiredFields = ['childName', 'childAge', 'occasion', 'genre', 'email'];
     for (const field of requiredFields) {
       if (!formData[field]) {
         throw new Error(`Missing required field: ${field}`);
@@ -40,12 +40,11 @@ serve(async (req) => {
     const orderId = `ORDER-${timestamp}-${randomStr}`;
     console.log('Generated order ID:', orderId);
 
-    // Prepare order data
+    // Prepare order data - removed ageGroup
     const orderData = {
       order_id: orderId,
       child_name: formData.childName,
       child_age: formData.childAge,
-      age_group: formData.ageGroup,
       occasion: formData.occasion,
       genre: formData.genre,
       hobbies: formData.hobbies || null,
@@ -70,13 +69,12 @@ serve(async (req) => {
       }
     })();
 
-    // Send email notification
+    // Send email notification - removed ageGroup from email template
     const emailHtml = `
       <h1>Neue Bestellung: ${orderId}</h1>
       <h2>Kinderinformationen:</h2>
       <p><strong>Name:</strong> ${formData.childName}</p>
       <p><strong>Alter:</strong> ${formData.childAge}</p>
-      <p><strong>Altersgruppe:</strong> ${formData.ageGroup}</p>
       <h2>Songdetails:</h2>
       <p><strong>Anlass:</strong> ${formData.occasion}</p>
       <p><strong>Genre:</strong> ${formData.genre}</p>
