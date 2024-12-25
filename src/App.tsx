@@ -7,6 +7,7 @@ import AGB from "./pages/AGB";
 import Datenschutz from "./pages/Datenschutz";
 import Impressum from "./pages/Impressum";
 import Summary from "./pages/Summary";
+import Success from "./pages/Success";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/summary",
     element: <Summary />,
+  },
+  {
+    path: "/success",
+    element: <Success />,
   },
 ]);
 
