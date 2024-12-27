@@ -18,7 +18,7 @@ export const ReviewsSection = () => {
       name: "Lisa B.",
       rating: 5,
       text: "Das Zahnputzlied mit dem Namen meines Sohnes hat unsere morgendliche Routine komplett verändert. Jetzt macht das Zähneputzen richtig Spaß! Absolut empfehlenswert.",
-      date: "Kölm"
+      date: "Köln"
     }
   ];
 
