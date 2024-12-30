@@ -62,7 +62,7 @@ export const Navigation = () => {
           {item.onClick ? (
             <a
               href={item.link}
-              className="block py-2 text-left hover:text-primary"
+              className="block py-2 text-left hover:text-primary text-foreground"
               onClick={item.onClick}
             >
               {item.title}
@@ -70,7 +70,7 @@ export const Navigation = () => {
           ) : (
             <Link
               to={item.link}
-              className="block py-2 text-left hover:text-primary"
+              className="block py-2 text-left hover:text-primary text-foreground"
               onClick={() => setIsOpen(false)}
             >
               {item.title}
@@ -84,7 +84,11 @@ export const Navigation = () => {
   return (
     <>
       <DiscountBanner onClose={() => setShowBanner(false)} />
-      <nav className={`fixed ${showBanner ? 'top-[48px]' : 'top-0'} left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-all duration-300 w-full`}>
+      <nav 
+        className={`fixed ${
+          showBanner ? 'top-[48px]' : 'top-0'
+        } left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-all duration-300 w-full`}
+      >
         <div className="max-w-6xl mx-auto px-4 w-full">
           <div className="flex items-center justify-between h-16">
             <a href="/" onClick={handleLogoClick} className="text-xl font-bold text-primary">
@@ -128,7 +132,7 @@ export const Navigation = () => {
                     {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background">
                   <div className="py-4">
                     <MobileMenu />
                     <div className="mt-4">
