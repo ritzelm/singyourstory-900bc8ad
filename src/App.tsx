@@ -8,6 +8,7 @@ import Datenschutz from "./pages/Datenschutz";
 import Impressum from "./pages/Impressum";
 import Summary from "./pages/Summary";
 import Success from "./pages/Success";
+import Blog from "./pages/Blog";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/success",
     element: <Success />,
+  },
+  {
+    path: "/blog",
+    element: <Blog />,
   },
 ]);
 

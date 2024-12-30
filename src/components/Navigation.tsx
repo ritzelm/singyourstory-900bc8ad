@@ -15,7 +15,6 @@ export const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -39,19 +38,18 @@ export const Navigation = () => {
     setIsOpen(false);
   };
 
-  // Handle FAQ scroll after navigation
   useEffect(() => {
     if (location.state?.scrollToFAQ) {
       setTimeout(() => {
         document.getElementById('faqs')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
-      // Clear the state
       navigate(location.pathname, { state: {}, replace: true });
     }
   }, [location.state, navigate]);
 
   const menuItems = [
     { title: "Über uns", link: "/about" },
+    { title: "Blog", link: "/blog" },
     { title: "Erstellen", link: "/create" },
     { title: "Preise", link: "/pricing" },
     { title: "FAQs", link: "/#faqs", onClick: handleFAQClick },
