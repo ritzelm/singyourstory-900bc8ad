@@ -25,9 +25,11 @@ export const BlogCard = ({ post }: { post: BlogPost }) => {
               className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full bg-secondary flex items-center justify-center">
-              <span className="text-secondary-foreground">No image</span>
-            </div>
+            <img
+              src="/lovable-uploads/ba9e2654-2d95-4e4a-b041-8599bdbc09a0.png"
+              alt="Kinder tanzen fröhlich"
+              className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+            />
           )}
         </div>
         <div className="space-y-2">

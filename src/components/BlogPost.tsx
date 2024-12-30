@@ -17,15 +17,26 @@ interface BlogPost {
 export const BlogPost = ({ post }: { post: BlogPost }) => {
   return (
     <article className="prose prose-lg max-w-none">
-      <h1 className="text-center font-bold text-[#E535AB] mb-8">{post.title}</h1>
+      <h1 className="text-center font-bold text-[#E535AB] mb-8">
+        {post.title.startsWith("🎵") ? post.title : `🎵 ${post.title}`}
+      </h1>
       {post.content.split("\n\n").map((paragraph, index) => {
         if (paragraph.startsWith("---")) {
           return <hr key={index} className="my-8 border-t-2 border-gray-200" />;
         }
         if (paragraph.startsWith("##")) {
+          const content = paragraph.replace("##", "").trim();
+          // Check if content already starts with an emoji and number
+          if (!content.match(/^[0-9️⃣]/)) {
+            return (
+              <h2 key={index} className="text-[#333333] font-bold text-2xl my-6">
+                {`1️⃣ ${content}`}
+              </h2>
+            );
+          }
           return (
             <h2 key={index} className="text-[#333333] font-bold text-2xl my-6">
-              {paragraph.replace("##", "").trim()}
+              {content}
             </h2>
           );
         }
@@ -41,7 +52,7 @@ export const BlogPost = ({ post }: { post: BlogPost }) => {
             <ul key={index} className="my-4 space-y-2">
               {paragraph.split("\n").map((item, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  {item.replace("-", "").trim()}
+                  {item.startsWith("- ➡️") ? item.replace("- ", "") : `➡️ ${item.replace("-", "").trim()}`}
                 </li>
               ))}
             </ul>
