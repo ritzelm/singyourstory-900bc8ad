@@ -6,6 +6,19 @@ import { BlogCard } from "@/components/BlogCard";
 import { BlogPost } from "@/components/BlogPost";
 import { useParams } from "react-router-dom";
 
+interface BlogPostType {
+  id: string;
+  title: string;
+  content: string;
+  description: string;
+  slug: string;
+  image_url: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 const Blog = () => {
   const { slug } = useParams();
 
@@ -20,7 +33,7 @@ const Blog = () => {
           .single();
 
         if (error) throw error;
-        return data;
+        return data as BlogPostType;
       } else {
         const { data, error } = await supabase
           .from("blog_posts")
@@ -28,7 +41,7 @@ const Blog = () => {
           .order("created_at", { ascending: false });
 
         if (error) throw error;
-        return data;
+        return data as BlogPostType[];
       }
     },
   });
@@ -80,7 +93,7 @@ const Blog = () => {
                 ))}
               </div>
             ) : (
-              posts && <BlogPost post={posts} />
+              posts && <BlogPost post={posts as BlogPostType} />
             )}
           </div>
         )}
