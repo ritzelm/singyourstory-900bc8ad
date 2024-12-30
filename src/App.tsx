@@ -51,6 +51,10 @@ const router = createBrowserRouter([
     path: "/blog",
     element: <Blog />,
   },
+  {
+    path: "/blog/:slug",
+    element: <Blog />,
+  },
 ]);
 
 export default router;
