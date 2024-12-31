@@ -113,11 +113,15 @@ export const BlogPost = ({ post }: { post: BlogPost }) => {
           </p>
         );
       })}
-      <div className="mt-16 flex flex-col items-center gap-6 bg-secondary/50 p-8 md:p-12 rounded-lg">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-center">
+      <div className="mt-16 flex flex-col items-center gap-6 bg-secondary/50 p-6 md:p-12 rounded-lg">
+        <h3 className="text-xl md:text-2xl lg:text-4xl font-semibold text-center">
           🌟 Bereit, einem Kind ein Lächeln ins Gesicht zu zaubern?
         </h3>
-        <Button asChild size="lg" className="font-semibold text-lg py-6 px-8 hover:scale-105 transition-transform">
+        <Button 
+          asChild 
+          size="lg" 
+          className="w-full md:w-auto text-base md:text-lg py-4 md:py-6 px-4 md:px-8 hover:scale-105 transition-transform font-semibold"
+        >
           <Link to="/create">Bestelle jetzt dein personalisiertes Lied 🎵</Link>
         </Button>
       </div>
