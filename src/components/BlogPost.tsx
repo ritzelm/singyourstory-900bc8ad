@@ -120,9 +120,11 @@ export const BlogPost = ({ post }: { post: BlogPost }) => {
         <Button 
           asChild 
           size="lg" 
-          className="w-full md:w-auto text-base md:text-lg py-4 md:py-6 px-4 md:px-8 hover:scale-105 transition-transform font-semibold"
+          className="w-full md:w-auto text-base md:text-lg py-4 md:py-6 px-6 md:px-8 hover:scale-105 transition-transform font-semibold text-center"
         >
-          <Link to="/create">Bestelle jetzt dein personalisiertes Lied 🎵</Link>
+          <Link to="/create">
+            Bestelle jetzt dein<br className="md:hidden" /> personalisiertes Lied 🎵
+          </Link>
         </Button>
       </div>
     </article>
