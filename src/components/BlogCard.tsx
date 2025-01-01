@@ -23,12 +23,18 @@ export const BlogCard = ({ post }: { post: BlogPost }) => {
               src={post.image_url}
               alt={post.title}
               className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+              onError={(e) => {
+                console.error('Image failed to load:', post.image_url);
+                e.currentTarget.src = "/lovable-uploads/ba9e2654-2d95-4e4a-b041-8599bdbc09a0.png";
+              }}
             />
           ) : (
             <img
               src="/lovable-uploads/ba9e2654-2d95-4e4a-b041-8599bdbc09a0.png"
               alt="Kinder tanzen fröhlich"
               className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
             />
           )}
         </div>
