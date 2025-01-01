@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { X, Copy, Check } from "lucide-react";
 
 const calculateTimeLeft = () => {
-  const difference = new Date('2024-12-31T23:59:59').getTime() - new Date().getTime();
+  const difference = new Date('2025-01-31T23:59:59').getTime() - new Date().getTime();
   
   if (difference <= 0) {
     return {
