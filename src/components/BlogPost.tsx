@@ -17,15 +17,6 @@ interface BlogPost {
 export const BlogPost = ({ post }: { post: BlogPost }) => {
   return (
     <article className="prose prose-lg max-w-none">
-      {post.image_url && (
-        <div className="mb-8 overflow-hidden rounded-lg aspect-video">
-          <img
-            src={post.image_url}
-            alt={post.title}
-            className="object-cover w-full h-full"
-          />
-        </div>
-      )}
       <h1 className="text-center font-bold text-[#E535AB] text-4xl md:text-5xl lg:text-6xl mb-16">
         {post.title}
       </h1>
