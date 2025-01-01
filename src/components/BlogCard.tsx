@@ -26,13 +26,13 @@ export const BlogCard = ({ post }: { post: BlogPost }) => {
               loading="lazy"
               onError={(e) => {
                 console.error('Image failed to load:', post.image_url);
-                e.currentTarget.src = "/lovable-uploads/1115482f-c458-4a3b-9b3e-ba9a0e0d056f.png";
+                e.currentTarget.src = "/lovable-uploads/de1b464d-895f-4e8c-908b-62aff17cfbd8.png";
               }}
             />
           ) : (
             <img
-              src="/lovable-uploads/1115482f-c458-4a3b-9b3e-ba9a0e0d056f.png"
-              alt="Familie feiert Neujahr mit Musik"
+              src="/lovable-uploads/de1b464d-895f-4e8c-908b-62aff17cfbd8.png"
+              alt="Kinder tanzen fröhlich"
               className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
             />
