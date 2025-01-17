@@ -5,19 +5,9 @@ import { Footer } from "@/components/Footer";
 import { BlogCard } from "@/components/BlogCard";
 import { BlogPost } from "@/components/BlogPost";
 import { useParams } from "react-router-dom";
+import type { Database } from "@/integrations/supabase/types";
 
-interface BlogPostType {
-  id: string;
-  title: string;
-  content: string;
-  description: string;
-  slug: string;
-  image_url: string | null;
-  meta_title: string | null;
-  meta_description: string | null;
-  created_at: string;
-  updated_at: string;
-}
+type BlogPostType = Database['public']['Tables']['blog_posts']['Row'];
 
 const Blog = () => {
   const { slug } = useParams();
@@ -27,18 +17,18 @@ const Blog = () => {
     queryFn: async () => {
       if (slug) {
         const { data, error } = await supabase
-          .from("blog_posts")
-          .select("*")
-          .eq("slug", slug)
+          .from('blog_posts')
+          .select('*')
+          .eq('slug', slug)
           .single();
 
         if (error) throw error;
         return data as BlogPostType;
       } else {
         const { data, error } = await supabase
-          .from("blog_posts")
-          .select("*")
-          .order("created_at", { ascending: false });
+          .from('blog_posts')
+          .select('*')
+          .order('created_at', { ascending: false });
 
         if (error) throw error;
         return data as BlogPostType[];
