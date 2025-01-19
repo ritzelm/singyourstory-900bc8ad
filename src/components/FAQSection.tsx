@@ -14,7 +14,7 @@ export const FAQSection = () => {
           Häufig gestellte Fragen
         </h2>
         
-        <Accordion type="single" collapsible className="mb-12">
+        <Accordion type="single" collapsible className="mb-12 text-left">
           <AccordionItem value="item-1">
             <AccordionTrigger>Wie personalisiere ich ein Lied?</AccordionTrigger>
             <AccordionContent>
