@@ -33,7 +33,6 @@ const AudioCard = ({
         audioRef.current.pause();
         setActiveAudioId(null);
       } else {
-        // Pause any currently playing audio
         if (activeAudioId && activeAudioId !== id) {
           const activeAudio = document.querySelector(`audio[data-id="${activeAudioId}"]`) as HTMLAudioElement;
           if (activeAudio) {
@@ -47,7 +46,6 @@ const AudioCard = ({
     }
   };
 
-  // Update playing state if another audio starts playing
   if (isPlaying && activeAudioId !== id) {
     setIsPlaying(false);
   }
@@ -84,7 +82,7 @@ export const AudioExamplesSection = () => {
     {
       id: "song1",
       title: "Anna räumt auf",
-      url: "https://ritzelmut.de/meinkinderlied-songs/annar%C3%A4umtauf.mp3"
+      url: "https://ritzelmut.de/meinkinderlied-songs/annarä;umtauf.mp3"
     },
     {
       id: "song2",
@@ -121,32 +119,21 @@ export const AudioExamplesSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="audio-scroll-container"
         >
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full max-w-5xl mx-auto"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {songs.map((song, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <AudioCard 
-                      title={song.title} 
-                      audioUrl={song.url} 
-                      activeAudioId={activeAudioId}
-                      setActiveAudioId={setActiveAudioId}
-                      id={song.id}
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+          <div className="flex gap-4 md:grid md:grid-cols-3 px-1">
+            {songs.map((song, index) => (
+              <div key={index} className="w-[85vw] md:w-auto flex-shrink-0">
+                <AudioCard 
+                  title={song.title} 
+                  audioUrl={song.url} 
+                  activeAudioId={activeAudioId}
+                  setActiveAudioId={setActiveAudioId}
+                  id={song.id}
+                />
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

@@ -54,6 +54,17 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
   }
+}
+
+/* Custom scrolling styles for audio examples */
+.audio-scroll-container {
+  @apply overflow-x-auto scroll-smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.audio-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
