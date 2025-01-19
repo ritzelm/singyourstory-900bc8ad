@@ -136,7 +136,7 @@ export const Navigation = () => {
                   side="right" 
                   className={`w-[300px] sm:w-[400px] bg-background ${showBanner ? 'mt-12' : 'mt-0'} transition-all duration-300`}
                 >
-                  <div className="py-4">
+                  <div className="pt-12 px-4">
                     <MobileMenu />
                     <div className="mt-4">
                       <Link to="/create" onClick={() => setIsOpen(false)}>
