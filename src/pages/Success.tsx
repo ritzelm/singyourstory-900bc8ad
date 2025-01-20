@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 const Success = () => {
   const navigate = useNavigate();
@@ -11,16 +12,22 @@ const Success = () => {
   useEffect(() => {
     const triggerBlinkWebhook = async () => {
       try {
-        const response = await fetch("http://tunnel.ritzelmut.de:5000/blink", {
+        const response = await fetch("https://tunnel.ritzelmut.de/blink", {
           method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
+        
         if (response.ok) {
-          console.log("Webhook triggered successfully.");
+          console.log("Webhook triggered successfully");
         } else {
           console.error("Failed to trigger webhook:", response.statusText);
+          // Don't show error to user as this is not critical functionality
         }
       } catch (error) {
         console.error("Error triggering webhook:", error);
+        // Don't show error to user as this is not critical functionality
       }
     };
 
